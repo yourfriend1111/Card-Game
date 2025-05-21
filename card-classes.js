@@ -176,3 +176,4 @@ const allCards = [
 
 
 
+console.log()
