@@ -121,7 +121,7 @@ const allCards = [
     new MeleeCard("Berserker", 4, 8, 5, 3, 1, "Gains +2 damage when below half health", ""),
     new MeleeCard("Knight", 3, 7, 4, 2, 1, "Takes reduced damage from ranged attacks", ""),
     new MeleeCard("Assassin", 2, 4, 6, 4, 1, "Can move through enemy units", ""),
-    new MeleeCard("Warrior", 3, 6, 4, 2, 1, "Basic melee unit with balanced stats", "images/Warrior.png"),
+    new MeleeCard("Warrior", 3, 6, 5, 2, 1, "Basic melee unit with balanced stats", "images/Warrior.png"),
     new MeleeCard("Paladin", 5, 9, 3, 2, 1, "Heals 1 health at the start of your turn", ""),
     new MeleeCard("Twilight Stalker", 6,8,4,1,1, "Once per turn, consume attack and gain +1 Dmg" , ""),
     
