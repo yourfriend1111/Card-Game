@@ -107,7 +107,7 @@ const allCards = [
     new RangedCard("Longbowman", 5, 6, 3, 3, 4, "This unit does +1 damage for every tile between this unit and its target", ""),
     new RangedCard("Venomtip Archer", 4, 4, 2, 3, 3, "On hit: Poison for 2 turns (2 dmg a turn)", ""),
     new RangedCard("Huntess", 4, 3, 4, 2, 3, "Once per turn, flip a coin, if heads gain 1 energy", ""),
-    new RangedCard("Frostbite Marksman", 5, 5, 4, 3, 4, "This unit is unaffected by terrain", ""), 
+    new RangedCard("Frostbite Marksman", 5, 5, 4, 3, 4, "This unit is unaffected by terrain", "images/Frostbite Marksman.png"), 
     new RangedCard("Death Homer", 4, 4, 5, 2, 3, "This unit cannot miss its target", ""),
     new RangedCard("High-Hill Sharpshot", 7, 8, 4, 2, 4, 'This unit does +2 dmg if on "High Ground" terrain. This unit does +2 dmg against "Flying" enemies', ""),
     new RangedCard("Archer", 3, 3, 3, 2, 3, "No Ability"),
