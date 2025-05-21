@@ -103,13 +103,18 @@ class TerrainCard extends Card {
 // Card Database
 const allCards = [
     // Ranged Cards
-    new RangedCard("Sharp Shooter", 3, 5, 4, 2, 3, "Uses full movement to make an extra attack", ""),
+    new RangedCard("Sharp Shooter", 4, 5, 4, 2, 3, "Uses full movement to make an extra attack", ""),
     new RangedCard("Longbowman", 5, 6, 3, 3, 4, "This unit does +1 damage for every tile between this unit and its target", ""),
     new RangedCard("Venomtip Archer", 4, 4, 2, 3, 3, "On hit: Poison for 2 turns (2 dmg a turn)", ""),
     new RangedCard("Huntess", 4, 3, 4, 2, 3, "Once per turn, flip a coin, if heads gain 1 energy", ""),
     new RangedCard("Frostbite Marksman", 5, 5, 4, 3, 4, "This unit is unaffected by terrain", ""), 
     new RangedCard("Death Homer", 4, 4, 5, 2, 3, "This unit cannot miss its target", ""),
     new RangedCard("High-Hill Sharpshot", 7, 8, 4, 2, 4, 'This unit does +2 dmg if on "High Ground" terrain. This unit does +2 dmg against "Flying" enemies', ""),
+    new RangedCard("Archer", 3, 3, 3, 2, 3, "No Ability"),
+    new RangedCard("Nullshot", 6, 6, 5, 3, 3, "When this unit deals damage to an enemy, their ability is disabled until the end of your opponents next turn", ""),
+    new RangedCard("Steelbark Archer", 7, 13, 5, 1, 3, "At the start of your turn, this unit gains 1 hp", ""),
+    new RangedCard("Eldrich Abomination", 5, 7, 0, 3, 3, "On hit: curse enemy. Once per turn, remove the curse from all enemies, each enemy takes 1 dmg for every cursed target", ""),
+    new RangedCard("Bomber #57", 5, 7, 5, 4, 1, "On hit: flip a coin, if heads all enemy units ajacent to the target take 2 dmg", ""),
 
     // Melee Cards
     new MeleeCard("Berserker", 4, 8, 5, 3, 1, "Gains +2 damage when below half health", ""),
