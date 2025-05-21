@@ -98,6 +98,7 @@ class TerrainCard extends Card {
     }
 }
 
+
 // Card Database
 const allCards = [
     // Ranged Cards
