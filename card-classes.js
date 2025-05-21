@@ -159,21 +159,3 @@ const allCards = [
     new TerrainCard("Holy Ground", 4, 1, 0, 0, 0, "Heals friendly units and damages enemy undead units", "2x2", "")
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-console.log()
