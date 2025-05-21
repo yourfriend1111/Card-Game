@@ -158,21 +158,3 @@ const allCards = [
     new TerrainCard("Lava Field", 5, -1, 0, 0, 0, "Damages all units that enter or remain in the area", "3x3", ""),
     new TerrainCard("Holy Ground", 4, 1, 0, 0, 0, "Heals friendly units and damages enemy undead units", "2x2", "")
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
