@@ -115,6 +115,7 @@ const allCards = [
     new MeleeCard("Assassin", 2, 4, 6, 4, 1, "Can move through enemy units", ""),
     new MeleeCard("Warrior", 3, 6, 4, 2, 1, "Basic melee unit with balanced stats", "images/Warrior.png"),
     new MeleeCard("Paladin", 5, 9, 3, 2, 1, "Heals 1 health at the start of your turn", ""),
+    new MeleeCard("Twilight Stalker", 6,8,4,1,1, "Once per turn, consume attack and gain +1 Dmg" , ""),
     
     // Flying Cards
     new FlyingCard("Phoenix", 5, 6, 3, 4, 2, "Can fly over obstacles", ""),
