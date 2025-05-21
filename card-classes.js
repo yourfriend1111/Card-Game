@@ -115,6 +115,7 @@ const allCards = [
     new RangedCard("Steelbark Archer", 7, 13, 5, 1, 3, "At the start of your turn, this unit gains 1 hp", ""),
     new RangedCard("Eldrich Abomination", 5, 7, 0, 3, 3, "On hit: curse enemy. Once per turn, remove the curse from all enemies, each enemy takes 1 dmg for every cursed target", ""),
     new RangedCard("Bomber #57", 5, 7, 5, 4, 1, "On hit: flip a coin, if heads all enemy units ajacent to the target take 2 dmg", ""),
+    new RangedCard("Ballista", 6, 11, 4, 2, 4, "On hit: flip a coin, if heads pierce enemy (Hits unit directly behind target)", ""), 
 
     // Melee Cards
     new MeleeCard("Berserker", 4, 8, 5, 3, 1, "Gains +2 damage when below half health", ""),
