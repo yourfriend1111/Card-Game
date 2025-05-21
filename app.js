@@ -362,3 +362,4 @@ function extendedInit() {
 // Replace the original init function's event listener
 document.removeEventListener('DOMContentLoaded', init);
 document.addEventListener('DOMContentLoaded', extendedInit);
+

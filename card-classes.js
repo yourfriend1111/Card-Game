@@ -102,6 +102,7 @@ class TerrainCard extends Card {
 const allCards = [
     // Ranged Cards
     new RangedCard("Sharp Shooter", 3, 5, 4, 2, 3, "Uses full movement to make an extra attack", ""),
+    new RangedCard("Longbowman", 5, 6, 3, 3, 4, "This unit does +1 damage for every tile between this unit and its target", ""),
     new RangedCard("Archer", 2, 3, 2, 3, 4, "Deals double damage to flying units", ""),
     new RangedCard("Musketeer", 4, 4, 5, 2, 5, "Can shoot through obstacles", ""),
     new RangedCard("Sniper", 5, 3, 7, 1, 6, "Can target any unit on the field", ""),
