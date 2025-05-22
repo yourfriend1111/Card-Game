@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Game - Deck Builder</title>
+  <link rel="stylesheet" href="deckbuilder.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Card Game - Deck Builder</h1>
+    
+    <!-- Deck Builder Mode -->
+    <div class="app-container" id="deck-builder-container">
+      <!-- Card Preview Section -->
+      <div class="card-preview-section">
+        <h2>Card Preview</h2>
+        <div class="card-preview-container" id="card-preview-container">
+          <img id="card-preview-image" class="card-preview-image" alt="Card Preview">
+          <div class="card-preview-info" id="card-preview-info">
+            <div class="preview-empty-message">Select a card to view details</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card Collection -->
+      <div class="card-collection">
+        <div class="collection-header">
+          <h2>Card Collection</h2>
+          <div class="search-filter">
+            <input type="text" id="search-input" placeholder="Search cards..." class="deck-name-input">
+          </div>
+        </div>
+        <div class="filter-controls">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Ranged">Ranged</button>
+          <button class="filter-btn" data-filter="Melee">Melee</button>
+          <button class="filter-btn" data-filter="Flying">Flying</button>
+          <button class="filter-btn" data-filter="Equipment">Equipment</button>
+          <button class="filter-btn" data-filter="Buff">Buff</button>
+          <button class="filter-btn" data-filter="Debuff">Debuff</button>
+          <button class="filter-btn" data-filter="Building">Building</button>
+          <button class="filter-btn" data-filter="Terrain">Terrain</button>
+          <button class="filter-btn" data-filter="Elite">Elite</button>
+        </div>
+        <div class="cards-grid" id="card-collection"></div>
+      </div>
+
+      <!-- Deck Builder -->
+      <div class="deck-builder">
+        <div class="deck-controls">
+          <h2>Current Deck</h2>
+          <button id="draw-cards-btn">Test Draw</button>
+        </div>
+        <div class="deck-stats">
+          <div class="stat-box" id="card-count">Cards: 0/40</div>
+          <div class="stat-box" id="avg-energy">Avg Energy: 0</div>
+          <div class="stat-box" id="type-distribution">Types: 0</div>
+        </div>
+        <div class="deck-list" id="current-deck">
+          <div class="empty-deck-message">Click a card to add it to your deck</div>
+        </div>
+        <div class="save-load-controls">
+          <div class="save-deck">
+            <input type="text" id="deck-name" placeholder="Deck Name" class="deck-name-input">
+            <button id="save-deck-btn">Save Deck</button>
+          </div>
+          <button id="clear-deck-btn">Clear Deck</button>
+        </div>
+        <div class="saved-decks">
+          <h3>Saved Decks</h3>
+          <div id="saved-decks-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Draw Modal -->
+    <div class="card-drawer hidden" id="card-drawer">
+      <div class="drawer-content">
+        <div class="drawer-header">
+          <h2>Test Hand</h2>
+          <div class="drawer-info" id="deck-draw-info">Cards remaining: 0</div>
+        </div>
+        <div class="drawn-cards" id="drawn-cards"></div>
+        <div class="drawer-controls">
+          <button id="draw-more-btn">Draw More</button>
+          <button id="shuffle-deck-btn">Shuffle & Redraw</button>
+          <button id="close-drawer-btn">Close</button>
+        </div>
+      </div>
+    </div>
+    
+    <script src="card-classes.js"></script>
+    <script src="setup.js"></script>
+  </div>
+</body>
+</html>
