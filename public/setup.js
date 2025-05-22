@@ -359,7 +359,7 @@ function loadSavedDecks() {
     el.innerHTML = `
       <div class="saved-deck-name">${deck.name} (${totalCards} cards)</div>
       <div class="saved-deck-details">
-        Combat: ${deck.phase1Cards ? deck.phase1Cards.length : 0} | Support: ${deck.phase2Cards ? deck.phase2Cards.length : 0}
+        Setup: ${deck.phase1Cards ? deck.phase1Cards.length : 0} | Combat: ${deck.phase2Cards ? deck.phase2Cards.length : 0}
       </div>
       <div class="saved-deck-btns">
         <button class="saved-deck-btn load-btn" data-index="${index}">Load</button>
