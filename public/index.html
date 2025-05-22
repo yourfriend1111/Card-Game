@@ -3,21 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Card Game - Deck Builder & Online Play</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Card Game - Deck Builder</title>
+  <link rel="stylesheet" href="deckbuilder.css">
 </head>
 <body>
   <div class="container">
-    <h1>Card Game</h1>
+    <h1>Card Game - Deck Builder</h1>
     
-    <!-- Mode Selection -->
-    <div class="mode-selection" id="mode-selection">
-      <div class="mode-buttons">
-        <button class="mode-btn active" id="deck-builder-mode-btn">Deck Builder</button>
-        <button class="mode-btn" id="online-play-mode-btn">Online Play</button>
-      </div>
-    </div>
-
     <!-- Deck Builder Mode -->
     <div class="app-container" id="deck-builder-container">
       <!-- Card Preview Section -->
@@ -49,6 +41,7 @@
           <button class="filter-btn" data-filter="Debuff">Debuff</button>
           <button class="filter-btn" data-filter="Building">Building</button>
           <button class="filter-btn" data-filter="Terrain">Terrain</button>
+          <button class="filter-btn" data-filter="Elite">Elite</button>
         </div>
         <div class="cards-grid" id="card-collection"></div>
       </div>
@@ -81,158 +74,6 @@
       </div>
     </div>
 
-    <!-- Online Play Mode -->
-    <div class="online-container hidden" id="online-container">
-      <!-- Room Selection -->
-      <div class="room-selection" id="room-selection">
-        <h2>Join or Create Game</h2>
-        <div class="room-controls">
-          <div class="join-room">
-            <input type="text" id="room-id-input" placeholder="Enter Room ID" class="deck-name-input">
-            <button id="join-room-btn">Join Room</button>
-          </div>
-          <div class="create-room">
-            <button id="create-room-btn">Create New Room</button>
-          </div>
-        </div>
-        <div class="deck-selection">
-          <h3>Select Your Deck</h3>
-          <select id="deck-selector" class="deck-name-input">
-            <option value="">Choose a saved deck...</option>
-          </select>
-        </div>
-        <div class="connection-status" id="connection-status">
-          <span class="status-indicator offline" id="status-indicator"></span>
-          <span id="status-text">Connecting...</span>
-        </div>
-      </div>
-
-      <!-- Game Lobby -->
-      <div class="game-lobby hidden" id="game-lobby">
-        <h2>Game Lobby</h2>
-        <div class="lobby-info">
-          <div class="room-info">
-            <h3>Room: <span id="current-room-id"></span></h3>
-            <div class="player-list" id="player-list"></div>
-          </div>
-          <div class="ready-controls">
-            <button id="ready-btn" class="ready-btn">Ready</button>
-            <button id="leave-room-btn" class="leave-btn">Leave Room</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Game Board -->
-      <div class="game-board hidden" id="game-board">
-        <!-- Game Header with Controls -->
-        <div class="game-header">
-          <div class="game-info">
-            <div class="turn-info">
-              <span id="turn-display">Turn 1 - Phase 1</span>
-              <span id="current-player-display">Waiting...</span>
-            </div>
-            <div class="player-stats">
-              <div class="player-stat">
-                <span>Your Health: </span><span id="your-health">100</span>
-              </div>
-              <div class="player-stat">
-                <span>Your Energy: </span><span id="your-energy">5</span>
-              </div>
-              <div class="player-stat">
-                <span>Opponent Health: </span><span id="opponent-health">100</span>
-              </div>
-              <div class="player-stat">
-                <span>Army Size: </span><span id="your-army-size">0</span> / <span id="opponent-army-size">0</span>
-              </div>
-            </div>
-          </div>
-          <div class="game-controls">
-            <button id="end-turn-btn" class="end-turn-btn">End Turn</button>
-            <button id="forfeit-btn" class="forfeit-btn">Forfeit</button>
-            <button id="toggle-grid-btn" class="toggle-btn">Toggle Grid</button>
-          </div>
-        </div>
-        
-        <!-- Main Game Area -->
-        <div class="game-main">
-          <!-- Left Sidebar - Selected Unit Info -->
-          <div class="unit-info-panel">
-            <h3>Unit Details</h3>
-            <div id="selected-unit-info" class="selected-unit-display">
-              <div class="no-selection">Click a unit to view details</div>
-            </div>
-            
-            <!-- Action Buttons for Selected Unit -->
-            <div class="unit-actions" id="unit-actions" style="display: none;">
-              <button id="move-unit-btn" class="action-btn">Move</button>
-              <button id="attack-unit-btn" class="action-btn">Attack</button>
-              <button id="cancel-selection-btn" class="action-btn secondary">Cancel</button>
-            </div>
-          </div>
-          
-          <!-- Game Board Container -->
-          <div class="board-container">
-            <!-- Opponent Territory Label -->
-            <div class="territory-label opponent-territory">
-              <h3>Opponent Territory</h3>
-            </div>
-            
-            <!-- The Game Board -->
-            <div class="battlefield" id="battlefield">
-              <canvas id="game-canvas" width="900" height="900"></canvas>
-              
-              <!-- Hover Info Tooltip -->
-              <div id="hover-tooltip" class="hover-tooltip hidden">
-                <div class="tooltip-content"></div>
-              </div>
-              
-              <!-- Grid Overlay (optional) -->
-              <div id="grid-overlay" class="grid-overlay"></div>
-            </div>
-            
-            <!-- Your Territory Label -->
-            <div class="territory-label your-territory">
-              <h3>Your Territory</h3>
-            </div>
-          </div>
-          
-          <!-- Right Sidebar - Game Log -->
-          <div class="game-log-panel">
-            <h3>Battle Log</h3>
-            <div id="game-log" class="game-log">
-              <div class="log-entry system">Game started!</div>
-            </div>
-            <button id="clear-log-btn" class="action-btn secondary small">Clear Log</button>
-          </div>
-        </div>
-        
-        <!-- Bottom Section - Hand and Card Actions -->
-        <div class="hand-section">
-          <div class="hand-header">
-            <h3>Your Hand</h3>
-            <div class="hand-stats">
-              <span>Cards: <span id="hand-count">0</span></span>
-              <span>Deck: <span id="deck-count">0</span></span>
-            </div>
-          </div>
-          
-          <div class="hand-container">
-            <div class="hand-cards" id="hand-cards">
-              <!-- Hand cards will be populated here -->
-            </div>
-          </div>
-          
-          <!-- Card Placement Target Indicator -->
-          <div id="placement-indicator" class="placement-indicator hidden">
-            <div class="indicator-content">
-              <span>Click on the board to place card</span>
-              <button id="cancel-placement-btn" class="cancel-btn">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Card Draw Modal -->
     <div class="card-drawer hidden" id="card-drawer">
       <div class="drawer-content">
@@ -248,43 +89,9 @@
         </div>
       </div>
     </div>
-
-    <!-- Game Messages and Notifications -->
-    <div class="message-overlay hidden" id="message-overlay">
-      <div class="message-content" id="message-content"></div>
-    </div>
     
-    <!-- Loading Overlay -->
-    <div class="loading-overlay hidden" id="loading-overlay">
-      <div class="loading-content">
-        <div class="loading-spinner"></div>
-        <div class="loading-text" id="loading-text">Loading...</div>
-      </div>
-    </div>
-    
-    <!-- Confirmation Dialog -->
-    <div class="confirmation-dialog hidden" id="confirmation-dialog">
-      <div class="dialog-content">
-        <div class="dialog-header">
-          <h3 id="confirmation-title">Confirm Action</h3>
-        </div>
-        <div class="dialog-body">
-          <p id="confirmation-message">Are you sure?</p>
-        </div>
-        <div class="dialog-actions">
-          <button id="confirm-yes-btn" class="action-btn">Yes</button>
-          <button id="confirm-no-btn" class="action-btn secondary">No</button>
-        </div>
-      </div>
-    </div>
-    
-    <script src="/socket.io/socket.io.js"></script>
     <script src="card-classes.js"></script>
-    <script src="game-logic.js"></script>
-    <script src="board-renderer.js"></script>
-    <script src="interactions.js"></script>
     <script src="setup.js"></script>
-    <script src="lobby.js"></script>
   </div>
 </body>
 </html>

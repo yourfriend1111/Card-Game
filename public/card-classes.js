@@ -45,6 +45,22 @@ class FlyingCard extends UnitCard {
     }
 }
 
+class EliteCard extends UnitCard {
+    constructor(name, health, damage, speed, range, ability, tributeRequirement, imageUrl) {
+        super(name, 10, health, damage, speed, range, ability, "Elite", imageUrl);
+        this.tributeRequirement = tributeRequirement; // Object describing tribute requirements
+    }
+    
+    describe() {
+        return `${this.name} [${this.type}] - Energy: ${this.energyCost}, Range: ${this.range}, Health: ${this.health}, Speed: ${this.speed}, Damage: ${this.damage}\nTribute: ${this.tributeRequirement.description}`;
+    }
+    
+    canTribute(card1, card2) {
+        // Check if the two cards meet the tribute requirements
+        return this.tributeRequirement.validator(card1, card2);
+    }
+}
+
 class ModifierCard extends Card {
     constructor(name, energyCost, health, damage, speed, range, ability, type, imageUrl) {
         super(name, energyCost, health, damage, speed, range, ability, type, imageUrl);
@@ -97,8 +113,6 @@ class TerrainCard extends Card {
         return `${this.name} [${this.type}] - Energy: ${this.energyCost}, Area: ${this.dimension}`;
     }
 }
-
-
 
 // Card Database
 const allCards = [
@@ -165,8 +179,11 @@ const allCards = [
     new TerrainCard("Swamp", 3, 0, 0, -1, 0, "Slows enemy movement through the area", "2x2", ""),
     new TerrainCard("Mountain", 4, 0, 1, 0, 1, "Provides height advantage for ranged attacks", "2x2", ""),
     new TerrainCard("Lava Field", 5, -1, 0, 0, 0, "Damages all units that enter or remain in the area", "3x3", ""),
-    new TerrainCard("Holy Ground", 4, 1, 0, 0, 0, "Heals friendly units and damages enemy undead units", "2x2", "")
+    new TerrainCard("Holy Ground", 4, 1, 0, 0, 0, "Heals friendly units and damages enemy undead units", "2x2", ""),
 
     // Elite Cards
-
+    new EliteCard("Ghostwing Archer", 9, 9, 3, 4, "Reset this troops turn on elimination (can move and attack again)", {
+        description: "2 Ranged cards with cost ≥ 5 each",
+        validator: (card1, card2) => card1.type === "Ranged" && card2.type === "Ranged" && card1.energyCost >= 5 && card2.energyCost >= 5
+    }, "")
 ];
