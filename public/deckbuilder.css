@@ -571,3 +571,122 @@ input:focus, select:focus {
   .phase-allowed-types { font-size: 0.8rem; }
   .card-type-badge { font-size: 0.65rem; }
 }
+
+/* ===== HAND FAN DISPLAY ===== */
+.hand-fan {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 220px;
+  padding: 50px 40px 30px;
+  position: relative;
+  perspective: 1000px;
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+}
+
+.hand-card {
+  position: absolute;
+  transform: 
+    translateX(var(--x-position, 0)) 
+    translateY(var(--y-offset, 0)) 
+    rotate(var(--rotation, 0deg));
+  transform-origin: center bottom;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: var(--z-index, 0);
+  cursor: pointer;
+  /* Add padding to the hover area to prevent conflicts */
+  margin: 10px;
+  pointer-events: auto;
+}
+
+.hand-card:hover {
+  z-index: 100 !important;
+}
+
+.hand-card:hover,
+.hand-card-hovered {
+  transform: 
+    translateX(var(--x-position, 0)) 
+    translateY(calc(var(--y-offset, 0px) - 20px)) 
+    rotate(var(--rotation, 0deg)) 
+    scale(1.02);
+  z-index: 100 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .hand-fan {
+    min-height: 200px;
+    padding: 40px 20px 20px;
+  }
+  
+  .hand-card {
+    transform: 
+      translateX(calc(var(--x-position, 0) * 0.7)) 
+      translateY(var(--y-offset, 0)) 
+      rotate(calc(var(--rotation, 0deg) * 0.8))
+      scale(0.9);
+    margin: 8px;
+  }
+  
+  .hand-card:hover,
+  .hand-card-hovered {
+    transform: 
+      translateX(calc(var(--x-position, 0) * 0.7)) 
+      translateY(calc(var(--y-offset, 0px) - 15px)) 
+      rotate(calc(var(--rotation, 0deg))) 
+      scale(0.92);
+  }
+}
+
+@media (max-width: 480px) {
+  .hand-fan {
+    min-height: 180px;
+    padding: 30px 10px 15px;
+  }
+  
+  .hand-card {
+    transform: 
+      translateX(calc(var(--x-position, 0) * 0.5)) 
+      translateY(var(--y-offset, 0)) 
+      rotate(calc(var(--rotation, 0deg) * 0.6))
+      scale(0.8);
+    margin: 6px;
+  }
+  
+  .hand-card:hover,
+  .hand-card-hovered {
+    transform: 
+      translateX(calc(var(--x-position, 0) * 0.5)) 
+      translateY(calc(var(--y-offset, 0px) - 12px)) 
+      rotate(calc(var(--rotation, 0deg))) 
+      scale(0.82);
+  }
+}
+
+/* Empty hand message styling */
+.empty-hand-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px;
+  font-size: 1.1rem;
+}
+
+/* Ensure the drawer content has enough space */
+.drawer-content {
+  min-width: 800px;
+  max-width: 95vw;
+}
+
+/* Adjust drawer for mobile */
+@media (max-width: 768px) {
+  .drawer-content {
+    min-width: 0;
+    width: 95%;
+    margin: 0 auto;
+  }
+}

@@ -376,7 +376,7 @@ function loadSavedDecks() {
     el.querySelector('.delete-btn').addEventListener('click', () => {
       if (confirm('Delete this deck?')) {
         decks.splice(index, 1);
-        localStorage.setItem('savedDecks', JSON.stringify(savedDecks));
+        localStorage.setItem('savedDecks', JSON.stringify(decks)); // Fixed: changed from 'savedDecks' to 'decks'
         loadSavedDecks();
       }
     });
@@ -471,6 +471,7 @@ function removeCardFromDeck(name) {
 }
 
 // New: Hand management functions
+// Updated Hand Display Function
 function updateHandDisplay() {
   drawnCardsElement.innerHTML = '';
   const currentHand = getCurrentHand();
@@ -479,8 +480,41 @@ function updateHandDisplay() {
   if (currentHand.length === 0) {
     drawnCardsElement.innerHTML = '<div class="empty-hand-message">No cards in hand</div>';
   } else {
-    currentHand.forEach(card => {
-      drawnCardsElement.appendChild(createCardElement(card, true));
+    // Create hand container with special class for fan layout
+    drawnCardsElement.className = 'drawn-cards hand-fan';
+    
+    currentHand.forEach((card, index) => {
+      const cardElement = createCardElement(card, true);
+      cardElement.classList.add('hand-card');
+      
+      // Calculate position and rotation for each card
+      const totalCards = currentHand.length;
+      const maxSpread = Math.min(totalCards * 25, 300); // Max spread of 300px
+      const cardSpacing = maxSpread / Math.max(totalCards - 1, 1);
+      
+      // Calculate horizontal position
+      const centerOffset = (totalCards - 1) * cardSpacing / 2;
+      const xPosition = (index * cardSpacing) - centerOffset;
+      
+      // Calculate rotation (cards at edges rotate more)
+      const maxRotation = 15; // degrees
+      const rotationFactor = (index - (totalCards - 1) / 2) / Math.max((totalCards - 1) / 2, 1);
+      const rotation = rotationFactor * maxRotation;
+      
+      // Calculate vertical offset (cards at edges lift up slightly)
+      const maxVerticalOffset = 20;
+      const verticalOffset = Math.abs(rotationFactor) * maxVerticalOffset;
+      
+      // Apply transforms
+      cardElement.style.setProperty('--x-position', `${xPosition}px`);
+      cardElement.style.setProperty('--rotation', `${rotation}deg`);
+      cardElement.style.setProperty('--y-offset', `${-verticalOffset}px`);
+      cardElement.style.setProperty('--z-index', index);
+      
+      // Add hover effect data
+      cardElement.setAttribute('data-hand-index', index);
+      
+      drawnCardsElement.appendChild(cardElement);
     });
   }
   
@@ -490,6 +524,104 @@ function updateHandDisplay() {
     ${config.name} - Hand: ${currentHand.length} | Deck remaining: ${drawPile.length}
   `;
 }
+
+// Enhanced card hover effects for hand
+// Updated Hand Display Function
+// Updated Hand Display Function
+function updateHandDisplay() {
+  drawnCardsElement.innerHTML = '';
+  const currentHand = getCurrentHand();
+  const config = PHASE_CONFIG[currentPhase];
+  
+  if (currentHand.length === 0) {
+    drawnCardsElement.innerHTML = '<div class="empty-hand-message">No cards in hand</div>';
+  } else {
+    // Create hand container with special class for fan layout
+    drawnCardsElement.className = 'drawn-cards hand-fan';
+    
+    currentHand.forEach((card, index) => {
+      const cardElement = createCardElement(card, true);
+      cardElement.classList.add('hand-card');
+      
+      // Calculate position and rotation for each card
+      const totalCards = currentHand.length;
+      const minSpacing = 60; // Minimum spacing between cards
+      const maxSpread = Math.max(totalCards * minSpacing, 400); // Ensure minimum spread
+      const cardSpacing = maxSpread / Math.max(totalCards - 1, 1);
+      
+      // Calculate horizontal position
+      const centerOffset = (totalCards - 1) * cardSpacing / 2;
+      const xPosition = (index * cardSpacing) - centerOffset;
+      
+      // Calculate rotation (much less rotation)
+      const maxRotation = 6; // Reduced from 15 to 6 degrees
+      const rotationFactor = (index - (totalCards - 1) / 2) / Math.max((totalCards - 1) / 2, 1);
+      const rotation = rotationFactor * maxRotation;
+      
+      // Calculate vertical offset (reduced curve)
+      const maxVerticalOffset = 10; // Reduced from 20 to 10
+      const verticalOffset = Math.abs(rotationFactor) * maxVerticalOffset;
+      
+      // Apply transforms
+      cardElement.style.setProperty('--x-position', `${xPosition}px`);
+      cardElement.style.setProperty('--rotation', `${rotation}deg`);
+      cardElement.style.setProperty('--y-offset', `${-verticalOffset}px`);
+      cardElement.style.setProperty('--z-index', index);
+      
+      // Add hover effect data
+      cardElement.setAttribute('data-hand-index', index);
+      
+      drawnCardsElement.appendChild(cardElement);
+    });
+  }
+  
+  // Update header info
+  const drawPile = getCurrentDrawPile();
+  deckDrawInfo.innerHTML = `
+    ${config.name} - Hand: ${currentHand.length} | Deck remaining: ${drawPile.length}
+  `;
+}
+
+// Enhanced card hover effects for hand
+function addHandCardHoverEffects() {
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('.hand-card')) {
+      const hoveredCard = e.target.closest('.hand-card');
+      const handContainer = hoveredCard.parentElement;
+      
+      if (handContainer.classList.contains('hand-fan')) {
+        // Simply add hover class - CSS will handle the positioning
+        hoveredCard.classList.add('hand-card-hovered');
+      }
+    }
+  });
+  
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest('.hand-card')) {
+      const hoveredCard = e.target.closest('.hand-card');
+      const handContainer = hoveredCard.parentElement;
+      
+      if (handContainer.classList.contains('hand-fan')) {
+        hoveredCard.classList.remove('hand-card-hovered');
+      }
+    }
+  });
+}
+
+// Initialize the hand hover effects
+document.addEventListener('DOMContentLoaded', () => {
+  addHandCardHoverEffects();
+});
+
+// Initialize the hand hover effects
+document.addEventListener('DOMContentLoaded', () => {
+  addHandCardHoverEffects();
+});
+
+// Initialize the hand hover effects
+document.addEventListener('DOMContentLoaded', () => {
+  addHandCardHoverEffects();
+});
 
 function playCard(card) {
   const currentHand = getCurrentHand();
@@ -587,8 +719,8 @@ function initPhaseSystem() {
   phaseControls.className = 'phase-controls';
   phaseControls.innerHTML = `
     <div class="phase-selection">
-      <button class="phase-btn active" data-phase="1">Phase 1: Combat</button>
-      <button class="phase-btn" data-phase="2">Phase 2: Support</button>
+      <button class="phase-btn active" data-phase="1">Phase 1: Setup</button>
+      <button class="phase-btn" data-phase="2">Phase 2: Combat</button>
     </div>
     <div class="phase-indicator" id="phase-indicator"></div>
   `;
@@ -662,7 +794,7 @@ function setupEventListeners() {
     if (existing !== -1) savedDecks[existing] = deck;
     else savedDecks.push(deck);
     
-    localStorage.setItem('savedDecks', JSON.stringify(decks));
+    localStorage.setItem('savedDecks', JSON.stringify(savedDecks)); // Fixed: changed from 'decks' to 'savedDecks'
     loadSavedDecks();
     deckNameInput.value = '';
   });
