@@ -13,15 +13,15 @@ let currentPhase = 1; // Phase 1: Combat units, Phase 2: Support cards
 // Phase configuration
 const PHASE_CONFIG = {
   1: {
-    name: "Combat Phase",
-    description: "Build your army with combat units (0-40 cards)",
+    name: "Setup Phase",
+    description: "Build your army with setup units (0-40 cards)",
     allowedTypes: ['Melee', 'Ranged', 'Flying', 'Building'],
     minCards: 0,
     maxCards: 40
   },
   2: {
-    name: "Support Phase", 
-    description: "Add support cards to enhance your strategy (0-40 cards)",
+    name: "Combat Phase", 
+    description: "Add Combat cards to enhance your strategy (0-40 cards)",
     allowedTypes: ['Elite', 'Terrain', 'Equipment', 'Buff', 'Debuff'],
     minCards: 0,
     maxCards: 40
@@ -149,7 +149,7 @@ function canAddCardToDeck(card) {
   if (!config.allowedTypes.includes(card.type)) {
     return {
       canAdd: false,
-      reason: `${card.type} cards can only be added in ${card.type === 'Equipment' || card.type === 'Buff' || card.type === 'Debuff' || card.type === 'Terrain' || card.type === 'Elite' ? 'Support Phase' : 'Combat Phase'}`
+      reason: `${card.type} cards can only be added in ${card.type === 'Equipment' || card.type === 'Buff' || card.type === 'Debuff' || card.type === 'Terrain' || card.type === 'Elite' ? 'Combat Phase' : 'Setup Phase'}`
     };
   }
   
@@ -331,8 +331,8 @@ function updateDeckStats() {
   
   cardCountElement.innerHTML = `
     Current: ${currentDeck.length}/${config.maxCards}<br>
-    Combat: ${phase1Count}/${PHASE_CONFIG[1].maxCards}<br>
-    Support: ${phase2Count}/${PHASE_CONFIG[2].maxCards}
+    Setup: ${phase1Count}/${PHASE_CONFIG[1].maxCards}<br>
+    Combat: ${phase2Count}/${PHASE_CONFIG[2].maxCards}
   `;
   
   const avg = currentDeck.length ? 
