@@ -690,3 +690,48 @@ input:focus, select:focus {
     margin: 0 auto;
   }
 }
+
+/* Navigation styles */
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px 0;
+      border-bottom: 2px solid #333;
+    }
+    
+    .nav-header h1 {
+      margin: 0;
+      color: #333;
+    }
+    
+    .back-to-lobby-btn {
+      background: linear-gradient(45deg, #e74c3c, #c0392b);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .back-to-lobby-btn:hover {
+      background: linear-gradient(45deg, #c0392b, #a93226);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    .back-to-lobby-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    /* Optional: Add an icon to the button */
+    .back-to-lobby-btn::before {
+      content: "← ";
+      margin-right: 5px;
+    }

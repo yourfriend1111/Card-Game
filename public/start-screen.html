@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game - Main Menu</title>
+    <link rel="stylesheet" href="start-screen.css">
+</head>
+<body>
+    <div class="container">
+        <header class="game-header">
+            <h1>Card Game</h1>
+            <p class="subtitle">Strategic Combat Awaits</p>
+        </header>
+        
+        <main class="menu-container">
+            <div class="menu-card">
+                <button class="menu-btn primary" id="deckBuilderBtn">
+                    <span class="btn-icon">🃏</span>
+                    <span class="btn-text">Deck Builder</span>
+                    <span class="btn-desc">Build and customize your deck</span>
+                </button>
+                
+                <button class="menu-btn" id="createLobbyBtn">
+                    <span class="btn-icon">➕</span>
+                    <span class="btn-text">Create Lobby</span>
+                    <span class="btn-desc">Start a new game</span>
+                </button>
+                
+                <button class="menu-btn" id="joinLobbyBtn">
+                    <span class="btn-icon">🔗</span>
+                    <span class="btn-text">Join Lobby</span>
+                    <span class="btn-desc">Enter an existing game</span>
+                </button>
+            </div>
+        </main>
+        
+        <!-- Join Lobby Modal -->
+        <div class="modal-overlay" id="joinModal">
+            <div class="modal">
+                <h3>Join Lobby</h3>
+                <input type="text" id="lobbyCodeInput" placeholder="Enter lobby code..." maxlength="6">
+                <div class="modal-buttons">
+                    <button class="modal-btn secondary" id="cancelBtn">Cancel</button>
+                    <button class="modal-btn primary" id="confirmJoinBtn">Join Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="start-screen.js"></script>
+</body>
+</html>

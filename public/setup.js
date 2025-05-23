@@ -179,9 +179,13 @@ function createCardElement(card, isInHand = false) {
   cardElement.className = 'card';
   cardElement.dataset.cardName = card.name;
   
-  // Add different styling for hand cards
+  // Prevent dragging on hand cards
   if (isInHand) {
     cardElement.classList.add('hand-card');
+    cardElement.draggable = false; // Explicitly prevent dragging
+    cardElement.style.userSelect = 'none'; // Prevent text selection
+    cardElement.style.pointerEvents = 'auto'; // Ensure clicks work
+    cardElement.style.position = 'relative'; // Ensure proper positioning for overlays
   }
   
   // Add visual indicator for phase compatibility
@@ -200,6 +204,13 @@ function createCardElement(card, isInHand = false) {
     img.style.height = '100%';
     img.style.objectFit = 'cover';
     img.style.borderRadius = '10px';
+    
+    // Prevent image dragging specifically
+    if (isInHand) {
+      img.draggable = false;
+      img.style.userSelect = 'none';
+    }
+    
     cardElement.appendChild(img);
     
     // Add phase indicator overlay for images (not in hand)
@@ -210,12 +221,53 @@ function createCardElement(card, isInHand = false) {
       cardElement.appendChild(overlay);
     }
 
-    // Add play button overlay for hand cards
+    // Add play button overlay for hand cards - FIXED VERSION
     if (isInHand) {
       const playOverlay = document.createElement('div');
       playOverlay.className = 'play-overlay';
       playOverlay.innerHTML = '<button class="play-btn">Play</button>';
+      playOverlay.style.cssText = `
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 5px;
+        padding: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        pointer-events: none;
+        z-index: 10;
+      `;
+      
+      // Style the play button
+      const playBtn = playOverlay.querySelector('.play-btn');
+      playBtn.style.cssText = `
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        width: 100%;
+        pointer-events: auto;
+      `;
+      
       cardElement.appendChild(playOverlay);
+      
+      // Show play button on hover - FIXED
+      cardElement.addEventListener('mouseenter', () => {
+        playOverlay.style.opacity = '1';
+        playOverlay.style.visibility = 'visible';
+        playOverlay.style.pointerEvents = 'auto';
+      });
+      cardElement.addEventListener('mouseleave', () => {
+        playOverlay.style.opacity = '0';
+        playOverlay.style.visibility = 'hidden';
+        playOverlay.style.pointerEvents = 'none';
+      });
     }
   } else {
     cardElement.innerHTML = `
@@ -232,29 +284,48 @@ function createCardElement(card, isInHand = false) {
       </div>
       <div class="card-ability">${card.ability}</div>
       ${!isAllowed && !isInHand ? '<div class="phase-indicator-text">Wrong Phase</div>' : ''}
-      ${isInHand ? '<button class="play-btn">Play</button>' : ''}
+      ${isInHand ? '<button class="play-btn" style="margin-top: auto; width: 100%; padding: 4px; font-size: 0.7rem; background: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;">Play</button>' : ''}
     `;
   }
 
   // Event listeners
   if (isInHand) {
+    // Prevent all drag-related events on hand cards
+    ['dragstart', 'drag', 'dragend', 'dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventType => {
+      cardElement.addEventListener(eventType, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+    });
+    
     // For hand cards, add play functionality
     const playBtn = cardElement.querySelector('.play-btn');
     if (playBtn) {
       playBtn.addEventListener('click', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         playCard(card);
       });
     }
     
-    // Still allow preview on click
-    cardElement.addEventListener('click', () => {
-      document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-      cardElement.classList.add('selected');
-      updateCardPreview(card);
+    // Still allow preview on click (but not drag)
+    cardElement.addEventListener('click', (e) => {
+      // Only handle click if it's not on the play button
+      if (!e.target.classList.contains('play-btn')) {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+        cardElement.classList.add('selected');
+        updateCardPreview(card);
+      }
     });
+    
+    // Add visual feedback for hand card interactions
+    cardElement.addEventListener('mousedown', (e) => {
+      e.preventDefault(); // Prevent any drag initialization
+    });
+    
   } else {
-    // For collection cards, update preview and select card
+    // For collection cards, update preview and select card (allow normal drag if implemented)
     cardElement.addEventListener('click', () => {
       document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
       cardElement.classList.add('selected');
@@ -832,3 +903,27 @@ function init() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', init);
+
+// Add navigation functionality
+document.addEventListener('DOMContentLoaded', function () {
+  const backToLobbyBtn = document.getElementById('back-to-lobby-btn');
+
+  if (backToLobbyBtn) {
+    backToLobbyBtn.addEventListener('click', function () {
+      // Check if there are unsaved changes (both phase decks)
+      const hasUnsavedChanges = (typeof phase1Deck !== 'undefined' && phase1Deck.length > 0) ||
+        (typeof phase2Deck !== 'undefined' && phase2Deck.length > 0);
+
+      if (hasUnsavedChanges) {
+        const confirmLeave = confirm('You have unsaved deck changes. Are you sure you want to return to the main menu?');
+        if (!confirmLeave) {
+          return;
+        }
+      }
+
+      // Navigate back to start screen (main menu)
+      console.log('Navigating back to main menu...');
+      window.location.href = '/';
+    });
+  }
+});
