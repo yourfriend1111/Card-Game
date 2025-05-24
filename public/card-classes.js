@@ -138,9 +138,9 @@ const allCards = [
     new MeleeCard("Static Warden", 5, 3, 2, 3, 1, "At the start of your turn, this unit gains +1 hp and +1 dmg for every 1 energy/mana used last turn, and +1 speed for every 3 energy/mana used last turn.", ""),
     new MeleeCard("Goldsnare Infantry", 4, 9, 5, 3, 1, "If this soldier gets a kill gain 2 energy", ""),
     new MeleeCard("Mudscale brawler", 4, 7, 5, 4, 1, "Immune to terrain and gain +1 speed while on terrain", ""),
-    new MeleeCard("Crimson Heart", 4, 7, 3, 4, 1, "On summon, all your melee troops gain+1 hp. You may sacrifice this card, all allied units gain +1 hp and +1 dmg", ""),
+    new MeleeCard("Crimson Heart", 4, 7, 3, 4, 1, "On summon, all your melee troops gain +1 hp. You may sacrifice this card, all allied units gain +1 hp and +1 dmg", ""),
     new MeleeCard("Siegebreaker", 5, 10, 2, 5, 1, "Can one tap all enemy buildings", ""),
-    new MeleeCard("Fleshstringed Goblin", 7, 3, 2, 4, 1, "At the start on your turn, this card gains +1 hp and +1 dmg for every unit in either players graveyard", ""),
+    new MeleeCard("Fleshstringed Goblin", 7, 1, 2, 4, 4, "At the start on your turn, this card gains +1 hp for every unit in either players graveyard", ""),
     new MeleeCard("Combat Medic", 6, 8, 5, 3, 1, "Once per turn, heal all ajacent units 2 hp. On hit: this unit heals all ajacent units 1hp", ""),
     new MeleeCard("Twilight Stalker", 6, 8, 1, 4, 1, "once per turn, consume attack and gain +1 Dmg. Abilitys only ativate once secound round starts", ""),
     new MeleeCard("Wisperwraith", 7, 7, 8, 3, 1, "Once per turn, this unit can teleport anywhere on the map and take 5 dmg", ""),
@@ -164,25 +164,20 @@ const allCards = [
 
 
     // Equipment Cards
-    new EquipmentCard("Fleshstichted totem","X", 0, 0, 0, 0, "Can bring back one dicarded troop with cost X-2 (Cant be an elite)", ""),
     new EquipmentCard("Purity Ember", 2, 0, 0, 0, 0, "Cleanses all negative afects on 1 troop", ""),
-    new EquipmentCard("Gilded Bastion",4 , 1, 0, 0, 0, "When hit by a ranged attack, flip a coin, ", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
-    new EquipmentCard("", , , , , , "", ""),
+    new EquipmentCard("Gilded Bastion", 4, 1, 0, 0, 0, "When hit by a ranged attack, flip a coin, in heads the attack misses this unit, gain +1 HP. This card can only be equipped by ground units", ""),
+    new EquipmentCard("Electric tipped arrows", 2, 0, 0, 0, 0, "All ranged attacks made by this unit apply the stun effect for 1 turn (Half dmg and movement). This card can only be equipped by ranged units.", ""),
+    new EquipmentCard("Spiked Armor", 5, 1, 0, 0, 0, "This this unit takes dmg from an enemy units attacks, the attacking unit takes 1 dmg, gain +1 HP. This card can only be equipped by melee units.", ""),
+    new EquipmentCard("Deaths Toll", 5, 0, 0, 0, 0, "This unit gains +1 hp and +1 dmg for every unit in your enemies graveyard", ""),
+    new EquipmentCard("Glass Protection", 4, 0, 0, 0, 0, "The next time this unit would take dmg, it takes 0 dmg instead, works once.", ""),
+    new EquipmentCard("Light Weight Body armor", 5, 1, 0, 1, 0, "Gain +1 HP and +1 Spd", ""),
+    new EquipmentCard("Full Plate armor", 6, 0, 0, 1, 0, "Sets and locks this units Dmg and Spd at 14 hp and 8 dmg, gain +1 spd", ""),
+    new EquipmentCard("Health Potion", 1, 0, 0, 0, 0, "Restore 2 HP", ""),
+
 
     
     // Buff Cards
+    new BuffCard("Fleshstichted totem","X", 0, 0, 0, 0, "Can bring back one dicarded troop with cost X-2 (Cant be an elite)", ""),
     new BuffCard("Rally", 2, 0, 1, 1, 0, "Boosts allied units in a 2x2 area", ""),
     new BuffCard("Healing Aura", 3, 3, 0, 0, 0, "Restores health to nearby friendly units", ""),
     new BuffCard("Battle Cry", 2, 0, 2, 0, 0, "All friendly units gain +2 damage for 2 turns", ""),
