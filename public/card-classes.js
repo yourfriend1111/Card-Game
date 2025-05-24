@@ -129,7 +129,7 @@ const allCards = [
     new RangedCard("Steelbark Archer", 7, 13, 5, 1, 3, "At the start of your turn, this unit gains 1 hp", ""),
     new RangedCard("Eldrich Abomination", 5, 7, 0, 3, 3, "On hit: curse enemy. Once per turn, remove the curse from all enemies, each enemy takes 1 dmg for every cursed target", ""),
     new RangedCard("Bomber #57", 5, 7, 5, 4, 3, "On hit: flip a coin, if heads all enemy units ajacent to the target take 2 dmg", ""),
-    new RangedCard("Ballista", 6, 11, 4, 2, 4, "On hit: flip a coin, if heads pierce enemy (Hits unit directly behind target)", ""), 
+    new RangedCard("Ballista", 7, 10, 4, 1, 4, "On hit: flip a coin, if heads pierce enemy (Hits unit directly behind target)", ""), 
 
     // Melee Cards
     new MeleeCard("Warrior", 3, 9, 5, 3, 1, "", ""),
@@ -144,7 +144,7 @@ const allCards = [
     new MeleeCard("Combat Medic", 6, 8, 5, 3, 1, "Once per turn, heal all ajacent units 2 hp. On hit: this unit heals all ajacent units 1hp", ""),
     new MeleeCard("Twilight Stalker", 6, 8, 1, 4, 1, "once per turn, consume attack and gain +1 Dmg. Abilitys only ativate once secound round starts", ""),
     new MeleeCard("Wisperwraith", 7, 7, 8, 3, 1, "Once per turn, this unit can teleport anywhere on the map and take 5 dmg", ""),
-    new MeleeCard("", , , , , , "", ""),
+    //new MeleeCard("", , , , , , "", ""),
 
     // Flying Cards
     new FlyingCard("Baby Dragon", 4, 2, 3, 6, 1, "Every 3 rounds +1/0/1", ""),
@@ -158,9 +158,9 @@ const allCards = [
     new FlyingCard("Storm Talon", 7, 11, 9, 6, 1, "After Attacking an enemy troop deal 5 Dmg to all other enemy troops in a 4 - 4", ""),
     new FlyingCard("Blightwinged Archer", 6, 1, 4, 6, 4, "On hit: Blight for 2 turns (Unit takes 1 more dmg from all attacks). This unit is immune to any (Blight Debuff cards)", ""),
     new FlyingCard("Pheonix", 7, 10, 7, 5, 1, "Upon Death revive this card at half hp (works once)", ""),
-    new FlyingCard("", , , , , , "", ""),
-    new FlyingCard("", , , , , , "", ""),
-    new FlyingCard("", , , , , , "", ""),
+    //new FlyingCard("", , , , , , "", ""),
+    //new FlyingCard("", , , , , , "", ""),
+    //new FlyingCard("", , , , , , "", ""),
 
 
     // Equipment Cards
